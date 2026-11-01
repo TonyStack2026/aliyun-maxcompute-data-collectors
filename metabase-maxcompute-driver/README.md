@@ -22,7 +22,7 @@ in [CONTRIBUTING.md](CONTRIBUTING.md#compatibility-claims).
 
 | Driver | Target Metabase range | Evidence for this artifact | ODPS JDBC | Status |
 | --- | --- | --- | --- | --- |
-| 0.1.1 | `>=0.63.0, <0.64.0` | 0.63.19 plugin load, database creation and native `SELECT 1`; 0.63.18 reads `ARRAY` columns as real arrays; plugin load on the latest patch of every minor 0.51-0.63 and on 0.64.0-beta | 3.10.14, bundled | Verification pending: full sync and MBQL acceptance are not recorded |
+| 0.1.1 | `>=0.63.0, <0.64.0` | 0.63.22 plugin load, database creation and native `SELECT 1` (0.63.19 the same, 2026-10-06); 0.63.18 reads `ARRAY` columns as real arrays; plugin load on the latest patch of every minor 0.51-0.63 and on 0.64.0-beta | 3.10.14, bundled | Verification pending: full sync and MBQL acceptance are not recorded |
 | 0.1.0 | `>=0.51.14, <0.64.0` (historical) | 0.51.14, 0.56.25.1, 0.60.15 load smoke; 0.63.1.12 full E2E | 3.10.11, bundled | Superseded by 0.1.1 |
 | 0.0.5 | `>=0.50.0, <0.51.0` | 0.50.21 | External JDBC | Legacy |
 
@@ -44,9 +44,11 @@ A Metabase release newer than the upper bound of the window is untested, not
 implicitly supported: check the matrix before upgrading past it.
 
 `0.64.0-beta` loads this driver, and every Metabase namespace and var the
-driver depends on resolves there exactly as it does on 0.63.19. It is still
-outside the window: it is a pre-release, 0.64 has no stable release yet, and no
-data-path check has been run above 0.63.19. See
+driver depends on resolves there exactly as it does on 0.63.19. That reading is
+from 2026-10-06, when 0.64 had no stable release. It has since gone GA
+(0.64.1 on 2026-10-07, 0.64.4 on 2026-10-30), so the 0.64.x window is being
+verified on its own line and is not claimed here: this release's window stops at
+`<0.64.0` until that verification lands. See
 [`docs/e2e/v0.1.1-range-load-smoke-2026-10-06.md`](docs/e2e/v0.1.1-range-load-smoke-2026-10-06.md).
 
 The exact, machine-readable matrix is in
