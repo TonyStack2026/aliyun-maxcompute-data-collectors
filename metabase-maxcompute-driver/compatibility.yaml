@@ -287,12 +287,32 @@ releases:
         artifact_sha256: b3beee5a5386152944cf160b01eefbf7b13bbbf443ce8b036c4c40ff9d3bf1fd
         result: pass
         versions: 0.51.14, 0.52.17, 0.53.18, 0.54.24, 0.55.24, 0.56.25, 0.57.20, 0.58.35, 0.59.31, 0.60.27, 0.61.21, 0.62.19, 0.63.19
+        latest_patch_refresh:
+          - version: 0.63.22
+            release_image: metabase/metabase:v0.63.22
+            image_digest: sha256:c8677c9cab17a39b7167f04e0bec57c0cfa5d55906d8ba0a0408f55c417a4e4a
+            tested_at: "2026-11-01"
+            result: pass
+          - version: 0.58.40
+            release_image: metabase/metabase:v0.58.40
+            image_digest: sha256:adc6b30f44044d62c6c54ff864e6ab1965d53a2110a1e857b0b4ab95d3a1c1b9
+            tested_at: "2026-11-15"
+            result: pass
         coverage_refresh: >-
-          That sweep ran on 2026-10-06. Upstream has since shipped 0.63.20,
-          0.63.21 and 0.63.22, so the in-window minor's latest patch is now
-          0.63.22 and that row is in observed_versions; the two intermediate
-          patches were not tested, because the policy asks for the latest patch
-          of each minor and they are no longer it.
+          That sweep ran on 2026-10-06, and the coverage line above is a claim
+          about the present, so it was re-checked against upstream at 2026-11-15
+          16:01 +08:00 (the 300 most recent releases, newest stable patch per
+          minor). Exactly one minor had moved: 0.58.36-0.58.40 shipped 2026-10-27
+          and 2026-11-13, so 0.58.35 is no longer that minor's latest patch and
+          0.58.40 is load-smoked in latest_patch_refresh above. The other twelve
+          were compared, not assumed: 0.51.14, 0.52.17, 0.53.18, 0.54.24, 0.55.24,
+          0.56.25, 0.57.20, 0.59.31, 0.60.27, 0.61.21, 0.62.19 are each still the
+          latest patch of their minor, and the in-window 0.63 line is still 0.63.22
+          (re-checked 2026-11-01, because 0.63.20 and 0.63.21 shipped first - the
+          two intermediate patches were not tested, since the policy asks for the
+          latest patch of each minor and they are no longer it). 0.64 has moved
+          from 0.64.4 to 0.64.6 and 0.65 from 0.65.2 to 0.65.4; both are outside
+          this window and are handled by their own 0.64.x verification line.
         note: >-
           Plugin load only, on the published bytes. Per the supported-window
           policy these out-of-window minors are observations, not commitments.

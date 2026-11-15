@@ -4,6 +4,14 @@ All notable changes to the MaxCompute Metabase Driver are recorded here.
 
 ## [Unreleased]
 
+- Re-check the range sweep's "latest published patch of every minor" claim against
+  upstream and refresh the one row that had drifted: 0.58.36-0.58.40 shipped
+  2026-10-27 and 2026-11-13, so 0.58.40 is now load-smoked on the same published
+  bytes (image digest `adc6b30f...`, pass, 2026-11-15). The other twelve minors
+  were compared rather than assumed - each is still at its swept patch, including
+  the in-window 0.63.22. Out-of-window rows stay observations, not commitments;
+  `max_exclusive` and every boundary are untouched.
+
 - Decide the MBQL cell from the gate itself and correct two claims inside my own
   2026-11-11 retraction. The cell does not fail because of the asynchronous `202`
   response - that body is terminal and readable on 0.51.14, 0.63.22 and 0.64.4;
@@ -94,4 +102,3 @@ All notable changes to the MaxCompute Metabase Driver are recorded here.
   is packaged inside the plugin.
 - Add a versioned compatibility matrix, reproducible build, checksum, SBOM,
   real MaxCompute E2E gate, and a reproducible release pipeline.
-
