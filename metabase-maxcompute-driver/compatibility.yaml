@@ -298,21 +298,46 @@ releases:
             image_digest: sha256:adc6b30f44044d62c6c54ff864e6ab1965d53a2110a1e857b0b4ab95d3a1c1b9
             tested_at: "2026-11-15"
             result: pass
+            superseded_by: 0.58.42
+          - version: 0.58.42
+            release_image: metabase/metabase:v0.58.42
+            image_digest: sha256:7d1c8ca1c7a67e92ae9039de71e96857d2c35985b8eff2fe584379a51ce8ba34
+            tested_at: "2026-11-21"
+            result: pass
+            role: current-latest-patch-of-0.58-minor
         coverage_refresh: >-
           That sweep ran on 2026-10-06, and the coverage line above is a claim
-          about the present, so it was re-checked against upstream at 2026-11-15
-          16:01 +08:00 (the 300 most recent releases, newest stable patch per
-          minor). Exactly one minor had moved: 0.58.36-0.58.40 shipped 2026-10-27
-          and 2026-11-13, so 0.58.35 is no longer that minor's latest patch and
-          0.58.40 is load-smoked in latest_patch_refresh above. The other twelve
-          were compared, not assumed: 0.51.14, 0.52.17, 0.53.18, 0.54.24, 0.55.24,
-          0.56.25, 0.57.20, 0.59.31, 0.60.27, 0.61.21, 0.62.19 are each still the
-          latest patch of their minor, and the in-window 0.63 line is still 0.63.22
-          (re-checked 2026-11-01, because 0.63.20 and 0.63.21 shipped first - the
-          two intermediate patches were not tested, since the policy asks for the
-          latest patch of each minor and they are no longer it). 0.64 has moved
-          from 0.64.4 to 0.64.6 and 0.65 from 0.65.2 to 0.65.4; both are outside
-          this window and are handled by their own 0.64.x verification line.
+          about the present, so it is re-measured rather than carried forward.
+          Second pass 2026-11-15 16:01 +08:00, third pass 2026-11-21 23:45
+          +08:00, both against the upstream release list (300 most recent
+          releases; on the third pass the window runs 2024-10-02T18:18:04Z to
+          2026-11-18T20:10:44Z), taking the newest stable patch per minor.
+          On the second pass one minor had moved; on the third pass one had moved
+          again - 0.58.42, published 2026-11-18T20:10:18Z - so 0.58.40 is itself
+          superseded and the 0.58.42 row above is the current one. The other
+          twelve were compared, not assumed, on both passes: 0.51.14, 0.52.17,
+          0.53.18, 0.54.24, 0.55.24, 0.56.25, 0.57.20, 0.59.31, 0.60.27, 0.61.21,
+          0.62.19 are each still the latest patch of their minor, and the in-window
+          0.63 line is still 0.63.22 (re-checked 2026-11-01, because 0.63.20 and
+          0.63.21 shipped first - the two intermediate patches were not tested,
+          since the policy asks for the latest patch of each minor and they are no
+          longer it). Out of window 0.64 has gone 0.64.4 to 0.64.6 to 0.64.8 and
+          0.65 0.65.2 to 0.65.4 to 0.65.6; both belong to their own 0.64.x
+          verification line and nothing here changes max_exclusive.
+          Correction to the second pass, kept visible: it stated "0.58.36-0.58.40
+          shipped 2026-10-27 and 2026-11-13". The release list has no v0.58.36 and
+          no v0.58.41 - those exist only as source tags (v0.58.36, v0.58.36.1,
+          v0.58.36.x, v0.58.41, v0.58.41.x) - so that minor shipped .35 on
+          2026-10-01, .37 and .38 on 2026-10-27, .39 and .40 on 2026-11-13, and
+          .42 on 2026-11-18.
+          Method limit, stated rather than hidden: "this image resolves" is not
+          backed by registry queries. `docker manifest inspect` fails from the
+          host that runs these cells for every tag tried (v0.58.41, v0.58.42,
+          v0.63.22, v0.63.23, v0.64.7, v0.64.8, v0.65.5, v0.65.6) with a v2
+          registry ping error, including tags that host has already pulled, and
+          the public tag index returned no parseable JSON. The evidence is the
+          pull each cell performs - the 0.58.42 row is that evidence by digest -
+          plus the release list for "newest patch".
         note: >-
           Plugin load only, on the published bytes. Per the supported-window
           policy these out-of-window minors are observations, not commitments.

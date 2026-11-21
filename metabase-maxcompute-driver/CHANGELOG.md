@@ -4,13 +4,30 @@ All notable changes to the MaxCompute Metabase Driver are recorded here.
 
 ## [Unreleased]
 
-- Re-check the range sweep's "latest published patch of every minor" claim against
+- Third pass of that coverage claim; one minor had moved again: 0.58.42, published
+  2026-11-18T20:10:18Z, load-smoked on the same published bytes (digest
+  `7d1c8ca1...`, pass, started 23:41:11 finished 23:44:07 +08:00 on 2026-11-21) and
+  the 0.58.40 entry is marked superseded. The other twelve minors were compared,
+  not assumed, and are unchanged, including the in-window 0.63.22. Out of window
+  0.64 went to 0.64.8 and 0.65 to 0.65.6 - noted only, no boundary change.
+  Two corrections to my own records, kept visible rather than quietly rewritten:
+  the 2026-11-15 entry said "0.58.36-0.58.40 shipped 2026-10-27 and 2026-11-13",
+  but the release list has no v0.58.36 and no v0.58.41 (both are source tags only),
+  so that minor shipped .35, .37, .38, .39, .40 and .42; and "this image resolves"
+  rests on the pull each cell performs, not on registry queries, because
+  `docker manifest inspect` fails for every tag tried from this host, including
+  tags already pulled.
+
+
   upstream and refresh the one row that had drifted: 0.58.36-0.58.40 shipped
   2026-10-27 and 2026-11-13, so 0.58.40 is now load-smoked on the same published
   bytes (image digest `adc6b30f...`, pass, 2026-11-15). The other twelve minors
   were compared rather than assumed - each is still at its swept patch, including
   the in-window 0.63.22. Out-of-window rows stay observations, not commitments;
   `max_exclusive` and every boundary are untouched.
+  (Kept as written; the entry above corrects two things in it: that minor has moved
+  again, to 0.58.42, and the ".36/.41" numbers in the range sentence are source
+  tags rather than published releases.)
 
 - Decide the MBQL cell from the gate itself and correct two claims inside my own
   2026-11-11 retraction. The cell does not fail because of the asynchronous `202`
